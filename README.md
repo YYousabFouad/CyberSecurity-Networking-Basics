@@ -8,12 +8,15 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 
 ## Topics Covered
 
-- **Networking Fundamentals**: Hosts, clients, servers, IPv4 addressing (32-bit / 4 octets, binary-to-decimal conversion), networks, and the Internet.
-- **Cisco Packet Tracer Labs** *(in progress)*: Topologies, addressing, basic connectivity verification, and core protocols.
+- **Networking Fundamentals**: Hosts, clients, servers, IPv4 addressing (32-bit / 4 octets, binary-to-decimal conversion), networks, switching, and routing.
+- **Cisco Packet Tracer Labs**: Topologies, addressing, basic connectivity verification, and multi-subnet routing.
 
 ## Repository Contents
 
-- [`Network Fundemental/00-network_fundamentals_study_notes_part1.md`](./Network%20Fundemental/00-network_fundamentals_study_notes_part1.md) — Study notes Part 1 (Hosts, Clients/Servers, IP Addresses, Networks).
+- [`Network Fundemental/How the Data Flows/`](./Network%20Fundemental/How%20the%20Data%20Flows/) — Explains how data flows from a PC across the local network until it reaches the router:
+  - [`00-network_fundamentals_study_notes_part1.md`](./Network%20Fundemental/How%20the%20Data%20Flows/00-network_fundamentals_study_notes_part1.md) — Study notes Part 1 (Hosts, Clients/Servers, IP Addresses, Networks).
+  - [`00-network_devices_and_routing.md`](./Network%20Fundemental/How%20the%20Data%20Flows/00-network_devices_and_routing.md) — Network devices, switching, gateways, and routing.
+  - [`two-subnets-router-lab.pkt`](./Network%20Fundemental/How%20the%20Data%20Flows/two-subnets-router-lab.pkt) — Cisco Packet Tracer lab connecting two subnets via a router.
 
 ## Tools
 
