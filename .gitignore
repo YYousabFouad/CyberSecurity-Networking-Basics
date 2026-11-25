@@ -1,0 +1,16 @@
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE / Obsidian local workspace state
+.vscode/
+.idea/
+.obsidian/
+*.swp
+*.swo
+*~
+
+# Temporary & backup files
+*.tmp
+*.bak
