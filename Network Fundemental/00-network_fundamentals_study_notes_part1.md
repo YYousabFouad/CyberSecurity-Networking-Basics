@@ -31,3 +31,9 @@
   - A logical grouping of hosts that require similar connectivity.
   - Networks can contain other networks, sometimes called **sub-networks (subnets)**.
 - **Internet:** A group of interconnected networks.
+
+---
+
+## Practice & Assessment Log
+- **Quiz:** Network & Subnets Fundamentals Check — **10/10**
+- **Verified Concepts:** Client/Server roles, IPv4 32-bit/Octet structure, Hierarchical IP allocation, Network vs. Subnet segmentation, and Router role.
