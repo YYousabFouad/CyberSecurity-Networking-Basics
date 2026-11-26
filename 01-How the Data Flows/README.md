@@ -12,4 +12,14 @@ This folder explains how data flows from a PC (host/client) across the local net
 
 - [`00-network_fundamentals_study_notes_part1.md`](./00-network_fundamentals_study_notes_part1.md) — Hosts, clients/servers, IPv4 addressing, networks, and assessment log.
 - [`00-network_devices_and_routing.md`](./00-network_devices_and_routing.md) — Signal decay, repeaters, hubs, bridges, switches, routers, gateways, switching vs. routing.
-- [`two-subnets-router-lab.pkt`](./two-subnets-router-lab.pkt) — Cisco Packet Tracer lab demonstrating two subnets communicating through a router.
+- [`two-subnets-router-lab.pkt`](./two-subnets-router-lab.pkt) — Cisco Packet Tracer lab connecting clients to switches across two subnets via a router, with IP configuration and `ping` verification.
+
+## Packet Tracer Lab Progress (`two-subnets-router-lab.pkt`)
+
+In the Packet Tracer topology, the following foundational networking steps were configured and tested:
+
+- **IP Addressing & Configuration:** Assigned IPv4 addresses to client hosts and router interfaces.
+- **Subnetting & Subnet Masks:** Applied subnet masks to separate the two subnets and determine local vs. remote destinations.
+- **Default Gateway:** Configured each client's default gateway so cross-subnet traffic is forwarded to the router.
+- **Topology Connections:** Connected clients (PCs) to local switches and linked both switches through a router.
+- **Connectivity Verification (`ping`):** Ran the `ping` command to verify end-to-end reachability between hosts across both subnets.
