@@ -23,6 +23,9 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 - [`03-Everything Hosts Do/`](./03-Everything%20Hosts%20Do/) — Covers direct and router-connected host communication, subnetting math, ARP resolution, DNS, and L2 hop-by-hop vs. L3 end-to-end delivery:
   - [`direct_host_connections_in_details.md`](./03-Everything%20Hosts%20Do/direct_host_connections_in_details.md) — Direct host connections, subnetting, ARP, and DNS.
   - [`hosts_connected_through_a_router.md`](./03-Everything%20Hosts%20Do/hosts_connected_through_a_router.md) — Hosts connected through single/multiple routers and L2 vs. L3 packet flow.
+- [`04-How Switches Work/`](./04-How%20Switches%20Work/) — Covers Layer 2 switching, MAC address tables, learning/forwarding/flooding, unicast vs. broadcast frames, VLANs, and access vs. trunk ports:
+  - [`switches_part_1.md`](./04-How%20Switches%20Work/switches_part_1.md) — Core switch concepts, MAC address table, and the three switch actions.
+  - [`switches_part_2.md`](./04-How%20Switches%20Work/switches_part_2.md) — Unicast vs. broadcast, VLANs, multi-switch operation, and 802.1Q trunking.
 
 ## Tools
 
