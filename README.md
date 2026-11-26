@@ -13,12 +13,12 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 
 ## Repository Contents
 
-- [`Network Fundemental/How the Data Flows/`](./Network%20Fundemental/How%20the%20Data%20Flows/) — Explains how data flows from a PC across the local network until it reaches the router:
-  - [`00-network_fundamentals_study_notes_part1.md`](./Network%20Fundemental/How%20the%20Data%20Flows/00-network_fundamentals_study_notes_part1.md) — Study notes Part 1 (Hosts, Clients/Servers, IP Addresses, Networks).
-  - [`00-network_devices_and_routing.md`](./Network%20Fundemental/How%20the%20Data%20Flows/00-network_devices_and_routing.md) — Network devices, switching, gateways, and routing.
-  - [`two-subnets-router-lab.pkt`](./Network%20Fundemental/How%20the%20Data%20Flows/two-subnets-router-lab.pkt) — Cisco Packet Tracer lab connecting two subnets via a router.
-- [`Network Fundemental/OSI Model/`](./Network%20Fundemental/OSI%20Model/) — Covers the OSI Model, Layer 1–3 addressing, ARP, and hop-by-hop packet flow:
-  - [`00-osi_model_and_addressing_part1.md`](./Network%20Fundemental/OSI%20Model/00-osi_model_and_addressing_part1.md) — OSI Model & Network Addressing Part 1.
+- [`How the Data Flows/`](./How%20the%20Data%20Flows/) — Explains how data flows from a PC across the local network until it reaches the router:
+  - [`00-network_fundamentals_study_notes_part1.md`](./How%20the%20Data%20Flows/00-network_fundamentals_study_notes_part1.md) — Study notes Part 1 (Hosts, Clients/Servers, IP Addresses, Networks).
+  - [`00-network_devices_and_routing.md`](./How%20the%20Data%20Flows/00-network_devices_and_routing.md) — Network devices, switching, gateways, and routing.
+  - [`two-subnets-router-lab.pkt`](./How%20the%20Data%20Flows/two-subnets-router-lab.pkt) — Cisco Packet Tracer lab connecting two subnets via a router.
+- [`OSI Model/`](./OSI%20Model/) — Covers the OSI Model, Layer 1–3 addressing, ARP, and hop-by-hop packet flow:
+  - [`00-osi_model_and_addressing_part1.md`](./OSI%20Model/00-osi_model_and_addressing_part1.md) — OSI Model & Network Addressing Part 1.
 
 ## Tools
 
