@@ -8,7 +8,7 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 
 ## Topics Covered
 
-- **Networking Fundamentals**: Hosts, clients, servers, IPv4 addressing (32-bit / 4 octets, binary-to-decimal conversion), networks, switching, routing, and the OSI Model (MAC vs. IP, ARP).
+- **Networking Fundamentals**: Hosts, clients, servers, IPv4 addressing (32-bit / 4 octets, binary-to-decimal conversion), networks, switching, routing, the OSI Model (MAC vs. IP, ARP, ports), subnetting, and DNS.
 - **Cisco Packet Tracer Labs**: Topologies, addressing, basic connectivity verification, and multi-subnet routing.
 
 ## Repository Contents
@@ -20,6 +20,8 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 - [`02-OSI Model/`](./02-OSI%20Model/) — Covers the OSI Model (Layers 1–7), MAC vs. IP addressing, ARP, ports, and encapsulation/decapsulation:
   - [`00-osi_model_and_addressing_part1.md`](./02-OSI%20Model/00-osi_model_and_addressing_part1.md) — OSI Model & Network Addressing Part 1 (Layers 1–3, MAC vs. IP, ARP).
   - [`01-osi_model_part2.md`](./02-OSI%20Model/01-osi_model_part2.md) — OSI Model Part 2 (Layers 4–7, TCP/UDP ports, stream isolation, encapsulation/decapsulation).
+- [`03-Everything Hosts Do/`](./03-Everything%20Hosts%20Do/) — Covers direct host-to-host communication, subnetting math, ARP resolution, and DNS:
+  - [`direct_host_connections_in_details.md`](./03-Everything%20Hosts%20Do/direct_host_connections_in_details.md) — Direct host connections, subnetting, ARP, and DNS.
 
 ## Tools
 
