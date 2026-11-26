@@ -26,6 +26,8 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 - [`04-How Switches Work/`](./04-How%20Switches%20Work/) — Covers Layer 2 switching, MAC address tables, learning/forwarding/flooding, unicast vs. broadcast frames, VLANs, and access vs. trunk ports:
   - [`switches_part_1.md`](./04-How%20Switches%20Work/switches_part_1.md) — Core switch concepts, MAC address table, and the three switch actions.
   - [`switches_part_2.md`](./04-How%20Switches%20Work/switches_part_2.md) — Unicast vs. broadcast, VLANs, multi-switch operation, and 802.1Q trunking.
+- [`05-Everything Routers Do/`](./05-Everything%20Routers%20Do/) — Covers Layer 3 routing fundamentals, RFCs, routing tables, route population methods, and dynamic routing protocols:
+  - [`everything_routers_do_part1.md`](./05-Everything%20Routers%20Do/everything_routers_do_part1.md) — Router core functions, RFCs, routing table components, directly connected/static/dynamic routes, and RIP/OSPF/EIGRP/IS-IS/BGP.
 
 ## Tools
 
