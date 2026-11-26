@@ -1,6 +1,6 @@
 # Everything Routers Do — Networking Fundamentals Study Notes
 
-> **Topic:** Router Core Functions, RFCs, Routing Tables, Route Population Methods (Directly Connected, Static, Dynamic), and Dynamic Routing Protocols  
+> **Topic:** Router Core Functions, Network Nodes, RFCs, Routing Tables, Route Population Methods (Directly Connected, Static, Dynamic), and Dynamic Routing Protocols  
 > **Format:** Structured Study Guide & Topology Reference
 
 ---
@@ -14,7 +14,60 @@ From your handwritten notes:
 
 ---
 
-## 2. RFC (Request for Comments)
+## 2. Network Nodes: Definition, Types & Key Concepts
+
+### What is a Node?
+In networking, a **Node** is **any active device or redistribution point connected to a network** that has a physical or virtual network interface and can **create, receive, process, store, or forward data** across a communication channel.
+
+> **Graph View (Nodes vs. Links):**
+> A network topology is like a map or graph:
+> - **Nodes (Vertices):** The devices themselves (PCs, servers, switches, routers, firewalls).
+> - **Links (Edges):** The physical or wireless connections between nodes (Ethernet cables, fiber-optic links, Wi-Fi, WAN circuits).
+
+### Main Types of Network Nodes
+
+| Node Category | Subtypes / Examples | Layer | Primary Role |
+| :--- | :--- | :--- | :--- |
+| **End Nodes (Hosts / Endpoints / End Systems)** | PCs, laptops, servers, smartphones, printers, IP cameras, IoT devices | Layers 3–7 | Originate or consume network traffic. They **drop** packets not addressed to them (unless acting as a router/gateway). |
+| **Intermediary (Transit) Nodes** | **Repeaters / Hubs** *(L1)*, **Switches / Bridges / Wireless APs** *(L2)*, **Routers / L3 Switches** *(L3)*, **Firewalls / Load Balancers** *(L3–L7)* | Layers 1–7 | Forward, switch, route, filter, or regenerate data **between** end nodes so traffic can cross LANs and the Internet. |
+
+*(Note: Passive components like patch cables or wall jacks are **media/links**, not nodes, because they do not address, process, or actively regenerate traffic. Similarly, in OSI/IS-IS terminology, end nodes are called **End Systems (ES)** and routers are called **Intermediate Systems (IS)**.)*
+
+### Core Concepts Related to Nodes in a Network
+
+1. **Node Addressing & Identity:**
+   - **MAC Address (Layer 2 Identity):** Uniquely identifies a node's Network Interface Card (NIC) on its **local network segment (LAN)**.
+   - **IP Address (Layer 3 Identity):** Logically identifies a node across **multiple networks**. A router node has *multiple* interfaces, each with its own IP and MAC address.
+   - **Hostname / DNS Name:** Human-readable label mapped to a node's IP address (e.g., `router1.corp.local`).
+2. **Source, Transit, and Destination Nodes:**
+   - **Source Node:** The originating host that creates the packet and puts its own IP in `Src IP`.
+   - **Transit Nodes (Intermediate Nodes):** Switches and routers in the middle that pass the frame/packet along.
+   - **Destination Node:** The final target host listed in `Dst IP`.
+3. **Adjacent Nodes (Neighbors) & Next-Hop Node:**
+   - **Neighbor / Adjacent Node:** Another node sharing a **direct link or local subnet** (e.g., two routers on `10.0.12.0/30` forming an OSPF/EIGRP neighbor adjacency, or a host and its default gateway).
+   - **Next-Hop Node:** The immediate next **Layer 3 node (router)** to which a packet is forwarded on its way toward a remote destination network.
+4. **Hops, Hop Count & TTL:**
+   - **Hop:** The traversal of a packet from one **Layer 3 node (router)** to the next (Layer 2 switches are generally transparent to Layer 3 hop counts).
+   - **Hop Count:** Total number of router nodes a packet passes through (used directly as the metric in RIP, max `15`).
+   - **TTL (Time To Live):** A counter in the IP header decremented by `1` at every router node; if `TTL` hits `0`, the node drops the packet to stop infinite routing loops.
+5. **Multi-Homed Nodes:**
+   - A node equipped with **two or more active network connections/interfaces** (for example, every router connecting multiple subnets, a server connected to two switches, or an enterprise connected to two different ISPs).
+6. **Redundancy & Single Point of Failure (SPOF):**
+   - If all traffic depends on a single transit node (e.g., one router or core switch) and that node goes down, connectivity fails (**Single Point of Failure**). Adding backup nodes and links lets dynamic routing protocols (OSPF, EIGRP, BGP) route around a failed node automatically.
+7. **Autonomous Systems (AS) & Edge vs. Core Nodes:**
+   - **Edge / Gateway Nodes:** Nodes sitting at the boundary between a local network and an external network/ISP (e.g., Default Gateway or BGP edge router).
+   - **Core / Backbone Nodes:** High-speed transit routers inside a network or ISP that forward traffic rapidly between edge nodes.
+   - **Leaf vs. Spine Nodes:** Common modern data-center topology terms where **Leaf nodes** connect end hosts/servers and **Spine nodes** interconnect the leaves.
+
+```text
+  [End Node: Host A] ----(Link)---- [Transit Node: SW1] ----(Link)---- [Transit Node: R1] ----(Link)---- [Transit Node: R2] ----(Link)---- [End Node: Host B]
+     (Source Node)                    (L2 Switch Node)                  (Default Gateway /                   (Next-Hop Node /                  (Destination Node)
+                                                                         Multi-Homed L3 Node)                 Adjacent Neighbor to R1)
+```
+
+---
+
+## 3. RFC (Request for Comments)
 
 ### What is an RFC?
 An **RFC (Request for Comments)** is a formal, peer-reviewed publication from the **IETF (Internet Engineering Task Force)** and the **Internet Society (ISOC)** that defines the technical standards, protocols, architectures, procedures, and best practices that make the Internet work.
@@ -45,7 +98,7 @@ Every standard RFC follows a strict, recognizable structure:
 
 ---
 
-## 3. Routing & The Routing Table
+## 4. Routing & The Routing Table
 
 ### What is Routing?
 **Routing** is the Layer 3 (Network Layer) process of selecting the optimal path across one or more interconnected networks to move IP packets from a source host to a destination host.
@@ -75,7 +128,7 @@ Every entry (route) in a Routing Table typically contains the following fields:
 
 ---
 
-## 4. How the Routing Table & MAC/ARP Table Are Populated (3 Methods)
+## 5. How the Routing Table & MAC/ARP Table Are Populated (3 Methods)
 
 > **Important Layer 3 vs. Layer 2 Distinction:**
 > * **IP Routes (Layer 3)** are populated into the **Routing Table** via the **3 methods** below (Directly Connected, Static, Dynamic).
@@ -238,7 +291,7 @@ O    | 10.0.23.0/30       | [110/20]  | via 10.0.12.2      | Gi0/2
 
 ---
 
-## 5. Dynamic Routing Protocols Explained in Detail
+## 6. Dynamic Routing Protocols Explained in Detail
 
 Dynamic routing protocols are classified along two main dimensions:
 1. **Scope (IGP vs. EGP):**
@@ -319,7 +372,7 @@ Dynamic routing protocols are classified along two main dimensions:
 
 ---
 
-## 6. Quick Comparison Summary of Dynamic Routing Protocols
+## 7. Quick Comparison Summary of Dynamic Routing Protocols
 
 | Protocol | Category | Algorithm | Default AD | Metric | Transport / Multicast | Primary Use Case |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
