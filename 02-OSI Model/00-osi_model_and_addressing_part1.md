@@ -4,7 +4,7 @@
 
 * **Purpose of Networking:** Allow 2 hosts to share data with one another.
 
-* **The OSI Model:** The rules for networking are divided into **7 layers**, known as the OSI Model.
+* **The OSI Model (*Open Systems Interconnection*):** The rules for networking are divided into **7 layers**, known as the OSI Model.
 
   * Each layer serves a specific function.
 
