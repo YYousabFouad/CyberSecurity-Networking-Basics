@@ -15,6 +15,15 @@ How data travels from one host to another across switches, routers, and the Inte
 - **Data Payload:**
   - Simply `1`s and `0`s—the network does not know or care what the application data does; its only job is delivering it.
 
+```text
+Host A -- [Switch] -- R1 -- (Internet) -- R2 -- Host B
+
+Hop 1: [ L2: a1a1 -> eee1 ] [ L3: 11.8.8.11 -> 22.7.7.22 ] [ Data ]
+Final: [ L2: eee2 -> b2b2 ] [ L3: 11.8.8.11 -> 22.7.7.22 ] [ Data ]
+       ^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         Changes per hop           Stays identical
+```
+
 ---
 
 ## 2. The Three Core Tables
@@ -27,20 +36,65 @@ Understanding how packets flow through a network comes down to three tables:
 - Checked against the **Destination MAC** to **Forward** (known unicast) or **Flood** (broadcast `ffff` or unknown unicast).
 - *Pass-through note:* Because traffic moves *through* a switch (not *to* or *from* it), the switch's own MAC and IP addresses do not matter—only its ports do.
 
+```text
+Host A (a1a1) --- (Port 4) [ Switch ] (Port 5) --- R1 (eee1)
+```
+
+| Switch Port | MAC Address | Type |
+| :--- | :--- | :--- |
+| `Port 4` | `a1a1` (`Host A`) | Dynamic |
+| `Port 5` | `eee1` (`R1`) | Dynamic |
+
 ### ARP Table / ARP Cache (Hosts & Routers)
-- Maps **IP Address ↔ MAC Address** on a local network.
+- Maps **IP Address ↔ MAC Address** on a local network (each device only caches neighbors on its own local subnet).
 - Starts **empty** and fills **dynamically** as needed via **ARP**:
   - **ARP Request (Broadcast `ffff`):** Asks everyone on the local network for the MAC owning a target IP, and also carries the sender's own `IP → MAC` mapping.
   - **ARP Reply (Unicast):** The owner of the target IP replies directly with its MAC address.
+
+**Host A — ARP Table:**
+
+| IP Address | MAC Address | Type |
+| :--- | :--- | :--- |
+| `11.8.8.1` (`R1`) | `eee1` | Dynamic |
+
+**R1 — ARP Table:**
+
+| IP Address | MAC Address | Type |
+| :--- | :--- | :--- |
+| `11.8.8.11` (`Host A`) | `a1a1` | Dynamic |
 
 ### Routing Table (Hosts & Routers)
 - Maps **IP Network → Directly Connected (`D.C.`)** or **Next-Hop IP / Internet**.
 - **Must be populated ahead of time**—if a router receives a packet whose Destination IP matches no route, the packet is **dropped**.
 - **Hosts also have a Routing Table:** Usually a **Default Route (`0.0.0.0/0`)** covering all IPv4 addresses and pointing to the host's **Default Gateway**.
 
+**Host Routing Table (Example: `Host A`):**
+
+| Destination Network | Next-Hop / Gateway | Interface |
+| :--- | :--- | :--- |
+| `11.8.8.0/24` | Directly Connected | Local NIC (`11.8.8.11`) |
+| `0.0.0.0/0` (Default) | `11.8.8.1` (`R1`) | Local NIC (`11.8.8.11`) |
+
+**Router Routing Table (Example: `R1`):**
+
+| Code | Destination Network | Next-Hop / Action | Outgoing Interface |
+| :--- | :--- | :--- | :--- |
+| `C` | `11.8.8.0/24` | Directly Connected (`D.C.`) | LAN Port (`11.8.8.1`) |
+| `S*` | `0.0.0.0/0` (Default) | Internet (Next ISP Router) | WAN Port |
+
 ---
 
 ## 3. What Each Device Does
+
+```text
+Same Network (Switch Only — 192.168.1.0/24):
+  PC 1 (.1.10) --- (P1) [ Switch ] (P2) --- PC 2 (.1.11)
+
+Different Networks (Switches + Router):
+  [ 192.168.1.0/24 ]                           [ 192.168.2.0/24 ]
+  PC 1 (.1.10) -- [Sw 1] -- [ Router ] -- [Sw 2] -- Server (.2.10)
+                           (.1.1 | .2.1)
+```
 
 ### Host
 1. Creates the Layer 3 packet (`Source IP`, `Destination IP`).
@@ -98,6 +152,16 @@ Network 1 (11.8.8.0/24)
   - `R3`: `33.6.6.0/24 → D.C.` and `0.0.0.0/0 → Internet`
 
 ### A. First Request: Host A → Host B (`11.8.8.11 → 22.7.7.22`) — Cold Tables
+
+```text
+ARP Request (Broadcast):  Host A --(P4)--> [Switch] --(P5)--> R1
+                                              |
+                                       (floods all ports)
+
+ARP Reply (Unicast):      Host A <--(P4)-- [Switch] <--(P5)-- R1
+                                      (forwards P4 only)
+```
+
 - **Host A resolves Default Gateway (`R1`) via ARP:**
   - Host A adds Layer 3 (`11.8.8.11 → 22.7.7.22`), sees `22.7.7.22` is on a foreign network, and targets its gateway `11.8.8.1`.
   - Because Host A's ARP table is empty, it holds the packet and broadcasts an **ARP Request** (`Src MAC: a1a1`, `Dst MAC: ffff`) containing `11.8.8.11 → a1a1`.
@@ -146,21 +210,51 @@ The exact same device rules repeat—only unvisited links need ARP:
 
 ### D. Final Populated Tables
 
-| Device | MAC / ARP Table | Routing Table |
+**Switch — MAC Address Table:**
+
+| Switch Port | MAC Address |
+| :--- | :--- |
+| `Port 4` | `a1a1` (`Host A`) |
+| `Port 5` | `eee1` (`R1`) |
+
+**Hosts & Routers — ARP Tables:**
+
+| Device | IP Address | MAC Address |
 | :--- | :--- | :--- |
-| **Switch** | `Port 4 ↔ a1a1`, `Port 5 ↔ eee1` | *(Layer 2 only — no Routing Table)* |
-| **Host A** | `11.8.8.1 ↔ eee1` | `0.0.0.0/0 → 11.8.8.1` |
-| **R1** | `11.8.8.11 ↔ a1a1` | `11.8.8.0/24 → D.C.`, `0.0.0.0/0 → Internet` |
-| **R2** | `22.7.7.22 ↔ b2b2` | `22.7.7.0/24 → D.C.`, `0.0.0.0/0 → Internet` |
-| **Host B** | `22.7.7.1 ↔ eee2` | `0.0.0.0/0 → 22.7.7.1` |
-| **R3** | `33.6.6.33 ↔ c3c3` | `33.6.6.0/24 → D.C.`, `0.0.0.0/0 → Internet` |
-| **Host C** | `33.6.6.1 ↔ eee3` | `0.0.0.0/0 → 33.6.6.1` |
+| **Host A** | `11.8.8.1` (`R1`) | `eee1` |
+| **R1** | `11.8.8.11` (`Host A`) | `a1a1` |
+| **R2** | `22.7.7.22` (`Host B`) | `b2b2` |
+| **Host B** | `22.7.7.1` (`R2`) | `eee2` |
+| **R3** | `33.6.6.33` (`Host C`) | `c3c3` |
+| **Host C** | `33.6.6.1` (`R3`) | `eee3` |
+
+**Hosts & Routers — Routing Tables:**
+
+| Device | Destination Network | Next-Hop / Action |
+| :--- | :--- | :--- |
+| **Host A** | `0.0.0.0/0` | `11.8.8.1` (`R1`) |
+| **R1** | `11.8.8.0/24` | `D.C.` (Directly Connected) |
+| **R1** | `0.0.0.0/0` | `Internet` |
+| **R2** | `22.7.7.0/24` | `D.C.` (Directly Connected) |
+| **R2** | `0.0.0.0/0` | `Internet` |
+| **Host B** | `0.0.0.0/0` | `22.7.7.1` (`R2`) |
+| **R3** | `33.6.6.0/24` | `D.C.` (Directly Connected) |
+| **R3** | `0.0.0.0/0` | `Internet` |
+| **Host C** | `0.0.0.0/0` | `33.6.6.1` (`R3`) |
 
 ---
 
 ## 5. What Happens When You Type `www.google.com` Into a Browser?
 
 Everything in the example above directly explains how visiting a website works in **two phases**:
+
+```text
+Phase 1 (DNS): PC (.11) -- [Sw] -- R1 -- (Internet) -- R2 -- DNS (.22)
+               "IP of www.google.com?" -> Returns: 33.6.6.33
+
+Phase 2 (Web): PC (.11) -- [Sw] -- R1 -- (Internet) -- R3 -- Web (.33)
+               "HTTP/HTTPS Request"    -> Returns: Website data
+```
 
 - **Phase 1 — DNS Lookup (`Host A ↔ Host B` as DNS Server):**
   - The browser needs the IP address for `www.google.com`, so `Host A` sends a **DNS Request** to the DNS Server (`Host B`) and receives the web server's IP (`33.6.6.33`).
