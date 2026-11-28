@@ -13,6 +13,7 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 
 ## Repository Contents
 
+- [`Packet Traveling.md`](./Packet%20Traveling.md) — Root-level master summary & fast-revision guide (*How Data Moves Through the Internet*) tying together MAC, ARP, and Routing tables, DNS + HTTP web browsing flow, and quick checks across all six topic folders.
 - [`two-subnets-router-lab.pkt`](./two-subnets-router-lab.pkt) — Combined Cisco Packet Tracer lab applying host addressing, local switching, and cross-network routing across two subnets.
 - [`01-How the Data Flows/`](./01-How%20the%20Data%20Flows/) — Explains how data flows from a PC across the local network until it reaches the router:
   - [`00-network_fundamentals_study_notes_part1.md`](./01-How%20the%20Data%20Flows/00-network_fundamentals_study_notes_part1.md) — Study notes Part 1 (Hosts, Clients/Servers, IP Addresses, Networks).
