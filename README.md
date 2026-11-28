@@ -30,6 +30,8 @@ Strong cybersecurity skills start with understanding how data actually moves acr
   - [`everything_routers_do_part1.md`](./05-Everything%20Routers%20Do/everything_routers_do_part1.md) — Router core functions, network nodes, RFCs, routing table components, directly connected/static/dynamic routes, and RIP/OSPF/EIGRP/IS-IS/BGP.
   - [`everything_routers_do_part_2.md`](./05-Everything%20Routers%20Do/everything_routers_do_part_2.md) — Router ARP tables, request/response forwarding walkthrough across routers, L2 vs. L3 header behavior, and what the Internet is.
   - [`router_hierarchy_route_summarization_notes.md`](./05-Everything%20Routers%20Do/router_hierarchy_route_summarization_notes.md) — Router hierarchy benefits, route summarization, Longest Prefix Match & tie-breakers, and default routes (`0.0.0.0/0`).
+- [`06-Network Protocols/`](./06-Network%20Protocols/) — Covers core network and application protocols (`ARP`, `FTP`, `SMTP`, `HTTP`, `SSL/TLS`, `HTTPS`, `DNS`, `DHCP`) and required host configuration items:
+  - [`network_protocols_study_notes.md`](./06-Network%20Protocols/network_protocols_study_notes.md) — Protocol definitions, how each works, ports/RFC references, the 4 host connectivity parameters, and quick-reference summary table.
 
 ## Packet Tracer Lab: `two-subnets-router-lab.pkt`
 
