@@ -13,10 +13,10 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 
 ## Repository Contents
 
+- [`two-subnets-router-lab.pkt`](./two-subnets-router-lab.pkt) — Combined Cisco Packet Tracer lab applying host addressing, local switching, and cross-network routing across two subnets.
 - [`01-How the Data Flows/`](./01-How%20the%20Data%20Flows/) — Explains how data flows from a PC across the local network until it reaches the router:
   - [`00-network_fundamentals_study_notes_part1.md`](./01-How%20the%20Data%20Flows/00-network_fundamentals_study_notes_part1.md) — Study notes Part 1 (Hosts, Clients/Servers, IP Addresses, Networks).
   - [`00-network_devices_and_routing.md`](./01-How%20the%20Data%20Flows/00-network_devices_and_routing.md) — Network devices, switching, gateways, and routing.
-  - [`two-subnets-router-lab.pkt`](./01-How%20the%20Data%20Flows/two-subnets-router-lab.pkt) — Cisco Packet Tracer lab connecting two subnets via a router.
 - [`02-OSI Model/`](./02-OSI%20Model/) — Covers the OSI Model (Layers 1–7), MAC vs. IP addressing, ARP, ports, and encapsulation/decapsulation:
   - [`00-osi_model_and_addressing_part1.md`](./02-OSI%20Model/00-osi_model_and_addressing_part1.md) — OSI Model & Network Addressing Part 1 (Layers 1–3, MAC vs. IP, ARP).
   - [`01-osi_model_part2.md`](./02-OSI%20Model/01-osi_model_part2.md) — OSI Model Part 2 (Layers 4–7, TCP/UDP ports, stream isolation, encapsulation/decapsulation).
@@ -30,6 +30,31 @@ Strong cybersecurity skills start with understanding how data actually moves acr
   - [`everything_routers_do_part1.md`](./05-Everything%20Routers%20Do/everything_routers_do_part1.md) — Router core functions, network nodes, RFCs, routing table components, directly connected/static/dynamic routes, and RIP/OSPF/EIGRP/IS-IS/BGP.
   - [`everything_routers_do_part_2.md`](./05-Everything%20Routers%20Do/everything_routers_do_part_2.md) — Router ARP tables, request/response forwarding walkthrough across routers, L2 vs. L3 header behavior, and what the Internet is.
   - [`router_hierarchy_route_summarization_notes.md`](./05-Everything%20Routers%20Do/router_hierarchy_route_summarization_notes.md) — Router hierarchy benefits, route summarization, Longest Prefix Match & tie-breakers, and default routes (`0.0.0.0/0`).
+
+## Packet Tracer Lab: `two-subnets-router-lab.pkt`
+
+This hands-on simulation ties together hosts, local switches, and routing across two independent IP networks:
+
+```text
+  [ Subnet 1: 192.168.1.0/24 ]                     [ Subnet 2: 192.168.2.0/24 ]
+
+  PC 1 (.1.10) --\                                        /--- Server (.2.10)
+                  [ Switch 1 ] --- [ Router ] --- [ Switch 2 ]
+  PC 2 (.1.11) --/                (.1.1 | .2.1)
+```
+
+### How It Works
+- **Switches Within Each Network (Same IP Subnet):** Switches connect hosts that share the same IP network and subnet mask so they can communicate locally using Layer 2 MAC forwarding. **Switch 1** connects the two client PCs (`192.168.1.10` and `192.168.1.11`), while an independent **Switch 2** connects the Server (`192.168.2.10`) on its own network.
+- **Router Between the Two Networks (Cross-Network Routing):** Because the PCs (`192.168.1.0/24`) and the Server (`192.168.2.0/24`) belong to two separate IP networks, switches alone cannot bridge them. Both switches connect to separate interfaces on the **Router**, which acts as each subnet's **default gateway** (`192.168.1.1` and `192.168.2.1`) and forwards packets between the two networks.
+- **Applied Skills & Verification:** Configured IPv4 addresses, `255.255.255.0` subnet masks, and default gateways on the hosts and router interfaces, then used `ping` to verify end-to-end connectivity between the PCs and the Server.
+
+| Network | Device | IP Address | Subnet Mask | Default Gateway |
+| :--- | :--- | :--- | :--- | :--- |
+| **Client LAN** (`192.168.1.0/24`) | Router (PCs Interface) | `192.168.1.1` | `255.255.255.0` | *N/A* |
+| **Client LAN** (`192.168.1.0/24`) | PC 1 | `192.168.1.10` | `255.255.255.0` | `192.168.1.1` |
+| **Client LAN** (`192.168.1.0/24`) | PC 2 | `192.168.1.11` | `255.255.255.0` | `192.168.1.1` |
+| **Server LAN** (`192.168.2.0/24`) | Router (Server Interface) | `192.168.2.1` | `255.255.255.0` | *N/A* |
+| **Server LAN** (`192.168.2.0/24`) | Server | `192.168.2.10` | `255.255.255.0` | `192.168.2.1` |
 
 ## Tools
 
