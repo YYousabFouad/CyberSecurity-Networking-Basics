@@ -26,9 +26,10 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 - [`04-How Switches Work/`](./04-How%20Switches%20Work/) — Covers Layer 2 switching, MAC address tables, learning/forwarding/flooding, unicast vs. broadcast frames, VLANs, and access vs. trunk ports:
   - [`switches_part_1.md`](./04-How%20Switches%20Work/switches_part_1.md) — Core switch concepts, MAC address table, and the three switch actions.
   - [`switches_part_2.md`](./04-How%20Switches%20Work/switches_part_2.md) — Unicast vs. broadcast, VLANs, multi-switch operation, and 802.1Q trunking.
-- [`05-Everything Routers Do/`](./05-Everything%20Routers%20Do/) — Covers Layer 3 routing fundamentals, network nodes, RFCs, routing tables, route population methods, dynamic routing protocols, and end-to-end packet forwarding:
+- [`05-Everything Routers Do/`](./05-Everything%20Routers%20Do/) — Covers Layer 3 routing fundamentals, network nodes, RFCs, routing tables, route population methods, dynamic routing protocols, end-to-end packet forwarding, router hierarchy, and route summarization:
   - [`everything_routers_do_part1.md`](./05-Everything%20Routers%20Do/everything_routers_do_part1.md) — Router core functions, network nodes, RFCs, routing table components, directly connected/static/dynamic routes, and RIP/OSPF/EIGRP/IS-IS/BGP.
   - [`everything_routers_do_part_2.md`](./05-Everything%20Routers%20Do/everything_routers_do_part_2.md) — Router ARP tables, request/response forwarding walkthrough across routers, L2 vs. L3 header behavior, and what the Internet is.
+  - [`router_hierarchy_route_summarization_notes.md`](./05-Everything%20Routers%20Do/router_hierarchy_route_summarization_notes.md) — Router hierarchy benefits, route summarization, Longest Prefix Match & tie-breakers, and default routes (`0.0.0.0/0`).
 
 ## Tools
 
