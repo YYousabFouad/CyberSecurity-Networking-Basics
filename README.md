@@ -21,6 +21,7 @@ Strong cybersecurity skills start with understanding how data actually moves acr
 - [`02-OSI Model/`](./02-OSI%20Model/) — Covers the OSI Model (Layers 1–7), MAC vs. IP addressing, ARP, ports, and encapsulation/decapsulation:
   - [`00-osi_model_and_addressing_part1.md`](./02-OSI%20Model/00-osi_model_and_addressing_part1.md) — OSI Model & Network Addressing Part 1 (Layers 1–3, MAC vs. IP, ARP).
   - [`01-osi_model_part2.md`](./02-OSI%20Model/01-osi_model_part2.md) — OSI Model Part 2 (Layers 4–7, TCP/UDP ports, stream isolation, encapsulation/decapsulation).
+  - [`the forgotten layers of osi model.md`](./02-OSI%20Model/the%20forgotten%20layers%20of%20osi%20model.md) — Layers 5–7 (Session cookies, Presentation bit encoding/ASCII, Application commands), HTTP vs. FTP, and abstraction layers.
 - [`03-Everything Hosts Do/`](./03-Everything%20Hosts%20Do/) — Covers direct and router-connected host communication, subnetting math, ARP resolution, DNS, and L2 hop-by-hop vs. L3 end-to-end delivery:
   - [`direct_host_connections_in_details.md`](./03-Everything%20Hosts%20Do/direct_host_connections_in_details.md) — Direct host connections, subnetting, ARP, and DNS.
   - [`hosts_connected_through_a_router.md`](./03-Everything%20Hosts%20Do/hosts_connected_through_a_router.md) — Hosts connected through single/multiple routers and L2 vs. L3 packet flow.
@@ -33,6 +34,7 @@ Strong cybersecurity skills start with understanding how data actually moves acr
   - [`router_hierarchy_route_summarization_notes.md`](./05-Everything%20Routers%20Do/router_hierarchy_route_summarization_notes.md) — Router hierarchy benefits, route summarization, Longest Prefix Match & tie-breakers, and default routes (`0.0.0.0/0`).
 - [`06-Network Protocols/`](./06-Network%20Protocols/) — Covers core network and application protocols (`ARP`, `FTP`, `SMTP`, `HTTP`, `SSL/TLS`, `HTTPS`, `DNS`, `DHCP`) and required host configuration items:
   - [`network_protocols_study_notes.md`](./06-Network%20Protocols/network_protocols_study_notes.md) — Protocol definitions, how each works, ports/RFC references, the 4 host connectivity parameters, and quick-reference summary table.
+  - [`How to send HTTP request using Telnet manually.md`](./06-Network%20Protocols/How%20to%20send%20HTTP%20request%20using%20Telnet%20manually.md) — HTTP vs. HTML, sending a manual HTTP `GET` request over TCP Port 80 via Telnet, and how browsers automate the process.
 
 ## Packet Tracer Lab: `two-subnets-router-lab.pkt`
 
